@@ -1,0 +1,1 @@
+export const NUMBER_OF_PLAYER_MULTIPLAYER = 2;

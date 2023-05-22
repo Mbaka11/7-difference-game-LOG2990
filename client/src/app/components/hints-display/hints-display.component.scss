@@ -1,0 +1,56 @@
+mat-icon {
+    color: rgb(229, 211, 15);
+    border: 1px solid rgb(229, 211, 15);
+    border-radius: 50%;
+    padding: 20px;
+}
+
+.hint-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.hints {
+    margin-bottom: 10px;
+}
+
+button {
+    background-color: green;
+    color: rgb(255, 255, 255);
+    height: 4em;
+    width: 14em;
+    margin: auto;
+    display: block;
+    transition: all 0.3s ease;
+    border-radius: 15px;
+    font-size: 15px;
+}
+
+button:hover {
+    background-color: rgb(29, 180, 29);
+    color: rgb(255, 255, 255);
+    height: 4.2em;
+    width: 14.2em;
+}
+
+.hint-pale {
+    opacity: 0.5;
+    color: rgb(0, 0, 0);
+    border: 1px solid rgb(0, 0, 0);
+}
+
+.hint {
+    margin: 0 10px;
+}
+
+#noMoreHintsMessage {
+    color: red;
+    text-align: center;
+    font-weight: bold;
+    margin-top: 15px;
+    transition: font-size 0.3s ease;
+}
+
+#noMoreHintsMessage:hover {
+    font-size: 1.2em;
+}

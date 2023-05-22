@@ -1,0 +1,204 @@
+<app-headbar [headbarMessage]="'Création...'"></app-headbar>
+
+<div #popup class="popup">
+    <img #differences class="canvas-image-popup" />
+    <div class="difficulty">
+        <div>
+            <p>Nombre de différences: {{ numberOfDiff }}</p>
+            <p>Niveau de difficulté: {{ difficulty }}</p>
+        </div>
+        <div class="modal-button-container">
+            <button [disabled]="isSaveButtonDisabled" mat-button class="modal-button" #saveBtn (click)="saveImage()">Sauvegarder</button>
+            <button mat-button class="modal-button" (click)="closePopup()">
+                <mat-icon>clear</mat-icon>
+            </button>
+        </div>
+    </div>
+</div>
+
+<div id="container">
+    <div class="creation-page">
+        <div id="top-banner">
+            <form class="form__group field">
+                <mat-form-field class="full-width">
+                    <mat-label>Nom</mat-label>
+                    <input
+                        type="input"
+                        class="form__field"
+                        matInput
+                        [formControl]="inputFormControl"
+                        placeholder="Ex. La cuisine"
+                        required
+                        [(ngModel)]="pictureTitle"
+                    />
+                    <mat-error *ngIf="inputFormControl.hasError('maxlength')">
+                        Le nom ne peut pas dépasser <strong>20</strong> caractères.
+                    </mat-error>
+                    <mat-error *ngIf="inputFormControl.hasError('required')"> Un nom est <strong>requis</strong> </mat-error>
+                    <mat-error *ngIf="inputFormControl.hasError('whitespace')"
+                        >Le nom ne peut pas être <strong>vide</strong> ou contenir seulement des <strong>espaces</strong> ou des
+                        <strong>tabulations</strong>.</mat-error
+                    >
+                </mat-form-field>
+            </form>
+            <div id="top-buttons">
+                <button mat-raised-button routerLink="/configuration">Retour sans sauvegarder</button>
+                <button mat-raised-button (click)="validateImage()">Valider</button>
+            </div>
+        </div>
+        <div class="radius-select-container">
+            <div id="undo-redo-buttons">
+                <button type="button" mat-fab color="primary" matTooltip="Undo" (click)="undo()">
+                    <mat-icon>undo</mat-icon>
+                </button>
+                <button type="button" mat-fab color="primary" matTooltip="Redo" (click)="redo()">
+                    <mat-icon>redo</mat-icon>
+                </button>
+            </div>
+            <div id="radius-selector">
+                <label id="radio-group-label">Rayon d'élargissement</label>
+                <mat-radio-group aria-labelledby="radio-group-label" [(ngModel)]="imgData.radius">
+                    <mat-radio-button class="radius-button" *ngFor="let radius of radiuses" [value]="radius">
+                        {{ radius }}
+                    </mat-radio-button>
+                </mat-radio-group>
+            </div>
+        </div>
+        <div class="canvas-container">
+            <div class="image-buttons-container">
+                <p>Ajouter un fichier</p>
+                <button
+                    type="button"
+                    mat-fab
+                    color="primary"
+                    matTooltip="Téléverser image gauche"
+                    matTooltipPosition="after"
+                    (click)="fileInputOriginal.click()"
+                >
+                    <mat-icon>cloud_upload</mat-icon>
+                </button>
+                <input
+                    hidden
+                    (change)="readImage($event, 'original')"
+                    #fileInputOriginal
+                    type="file"
+                    id="file"
+                    class="input-button"
+                    accept="image/bmp"
+                />
+                <button mat-fab color="primary" matTooltip="Retirer image gauche" matTooltipPosition="after" (click)="resetImg('original')">
+                    <mat-icon>delete</mat-icon>
+                </button>
+                <button mat-raised-button (click)="this.leftCanvas.resetForeground()">Réinitialiser</button>
+            </div>
+
+            <div class="container">
+                <canvas #leftMergeCanvas class="canvas-image" width="640" height="480"></canvas>
+                <canvas #original class="canvas-image" width="640" height="480"></canvas>
+                <app-canvas
+                    [currentColor]="this.currentColor"
+                    [currentStrokeWidth]="this.currentStrokeWidth"
+                    [selectedPaintOption]="this.selectedPaintOption"
+                    (addDifference)="this.addModification($event)"
+                    class="canvas-image"
+                    #leftMods
+                ></app-canvas>
+            </div>
+
+            <div class="upload-both">
+                <button
+                    type="button"
+                    mat-fab
+                    color="primary"
+                    matTooltip="Téléverser aux deux canveas"
+                    matTooltipPosition="above"
+                    (click)="fileInputBoth.click()"
+                >
+                    <mat-icon>cloud_upload</mat-icon>
+                </button>
+                <input hidden (change)="readImage($event, 'both')" #fileInputBoth type="file" id="file" class="input-button" accept="image/bmp" />
+                <div>
+                    <input hidden (keyup.control.Z)="undo()" />
+                    <button
+                        type="button"
+                        mat-fab
+                        color="primary"
+                        matTooltip="Invertir avant plans"
+                        matTooltipPosition="after"
+                        (click)="swapForegrounds()"
+                    >
+                        <mat-icon>swap_horiz</mat-icon>
+                    </button>
+                    <input hidden (keyup.shift.control.Z)="undo()" />
+
+                    <div>
+                        <button
+                            mat-fab
+                            (click)="duplicateForeground(this.leftCanvas, this.rightCanvas)"
+                            matTooltip="Dupliquer l'image de gauche"
+                            matTooltipPosition="after"
+                        >
+                            <mat-icon>arrow_forward</mat-icon>
+                        </button>
+                        <button
+                            mat-fab
+                            (click)="duplicateForeground(this.rightCanvas, this.leftCanvas)"
+                            matTooltip="Dupliquer l'image de droite"
+                            matTooltipPosition="after"
+                        >
+                            <mat-icon>arrow_back</mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+                <canvas #rightMergeCanvas hidden class="canvas-image" width="640" height="480"></canvas>
+                <canvas #modified class="canvas-image" width="640" height="480"></canvas>
+                <app-canvas
+                    [currentColor]="this.currentColor"
+                    [currentStrokeWidth]="this.currentStrokeWidth"
+                    [selectedPaintOption]="this.selectedPaintOption"
+                    (addDifference)="this.addModification($event)"
+                    class="canvas-image"
+                    #rightMods
+                ></app-canvas>
+            </div>
+
+            <div class="image-buttons-container">
+                <p>Ajouter un fichier</p>
+                <button
+                    type="button"
+                    mat-fab
+                    color="primary"
+                    matTooltip="Téléverser image droite"
+                    matTooltipPosition="after"
+                    (click)="fileInputModified.click()"
+                >
+                    <mat-icon>cloud_upload</mat-icon>
+                </button>
+                <input
+                    hidden
+                    (change)="readImage($event, 'modified')"
+                    #fileInputModified
+                    type="file"
+                    id="file"
+                    class="input-button"
+                    accept="image/bmp"
+                />
+                <button mat-fab color="primary" matTooltip="Retirer image droite" matTooltipPosition="after" (click)="resetImg('modified')">
+                    <mat-icon>delete</mat-icon>
+                </button>
+                <button mat-raised-button (click)="this.rightCanvas.resetForeground()">Réinitialiser</button>
+            </div>
+        </div>
+
+        <div class="paint-container">
+            <app-paint
+                (changeColor)="this.currentColor = $event"
+                (changeStrokeWidth)="this.currentStrokeWidth = $event"
+                (changeSelectedOption)="this.selectedPaintOption = $event"
+            ></app-paint>
+        </div>
+    </div>
+</div>

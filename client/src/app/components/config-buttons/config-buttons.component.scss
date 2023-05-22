@@ -1,0 +1,14 @@
+.config-buttons {
+    display: flex;
+    justify-content: right;
+}
+
+.config-buttons button {
+    margin-top: 10px;
+    margin-bottom: 1vw;
+    margin-right: 10px;
+}
+
+.config-buttons button:not([disabled]) {
+    background-color: var(--primary-color-blue);
+}

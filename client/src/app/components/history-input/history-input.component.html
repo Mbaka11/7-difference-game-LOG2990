@@ -1,0 +1,55 @@
+<table *ngIf="!isEmpty; else emptyHistory" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef class="centered-header-cell">Date</th>
+        <td mat-cell *matCellDef="let element">{{ element.date }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="duration">
+        <th mat-header-cell *matHeaderCellDef class="centered-header-cell">Durée</th>
+        <td mat-cell *matCellDef="let element">{{ element.duration }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="gameMode">
+        <th mat-header-cell *matHeaderCellDef class="centered-header-cell">Mode de jeu</th>
+        <td mat-cell *matCellDef="let element">{{ element.gameMode }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="players">
+        <th mat-header-cell *matHeaderCellDef class="centered-header-cell">
+            Joueur(s)<mat-icon id="nom-joueurs-info"
+                matTooltip="Un joueur ayant abandonné est barré. Les joueurs ayant perdu sont en texte normal. Les joueurs ayant gagné sont en gras."
+                >information</mat-icon
+            >
+        </th>
+        <td mat-cell *matCellDef="let element">
+            <ng-container *ngFor="let player of element.players">
+                <ng-container *ngIf="player === element.surrender; else winnerCheck">
+                    <del>{{ player + '\n' }}</del>
+                </ng-container>
+                <ng-template #winnerCheck>
+                    <ng-container *ngIf="player === element.winner; else normalText">
+                        <b>{{ player + '\n' }}</b>
+                    </ng-container>
+                    <ng-template #normalText>
+                        <ng-container *ngIf="player !== null">
+                            {{ player + '\n' }}
+                        </ng-container>
+                    </ng-template>
+                </ng-template>
+            </ng-container>
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
+
+<ng-template #emptyHistory>
+    <div class="newtons-cradle">
+        <div class="newtons-cradle__dot"></div>
+        <div class="newtons-cradle__dot"></div>
+        <div class="newtons-cradle__dot"></div>
+        <div class="newtons-cradle__dot"></div>
+    </div>
+    <div class="empty-history-text">Aucune partie n'a été jouée. Veuillez en terminer une pour l'ajouter à l'historique.</div>
+</ng-template>

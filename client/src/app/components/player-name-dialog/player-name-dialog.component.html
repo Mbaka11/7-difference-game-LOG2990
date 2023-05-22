@@ -1,0 +1,4 @@
+<div class="flex-center">
+    <app-form [form]="form" (username)="onUsernameChange($event)"></app-form>
+    <button mat-button mat-dialog-close (click)="changePage()" [disabled]="form.invalid || !form.value.username">Continuer</button>
+</div>

@@ -1,0 +1,27 @@
+<div class="config-buttons">
+    <div class="create-button">
+        <button mat-fab color="primary" matTooltip="Créer" routerLink="/creation">
+            <mat-icon>add</mat-icon>
+        </button>
+    </div>
+    <div class="modify-time-button">
+        <button mat-fab color="primary" matTooltip="Modifier les constantes de temps" (click)="openTimeSettings()">
+            <mat-icon>settings</mat-icon>
+        </button>
+    </div>
+    <div class="history-button">
+        <button mat-fab color="primary" matTooltip="Historique" (click)="openHistory()">
+            <mat-icon>menu_book</mat-icon>
+        </button>
+    </div>
+    <div class="history-button">
+        <button mat-fab color="primary" matTooltip="Réinitialiser tous les podiums" (click)="deleteAllPodiums()">
+            <mat-icon>emoji_events</mat-icon>
+        </button>
+    </div>
+    <div class="history-button">
+        <button mat-fab color="primary" matTooltip="Supprimer tous les jeux" (click)="deleteAllGames()">
+            <mat-icon>delete_forever</mat-icon>
+        </button>
+    </div>
+</div>

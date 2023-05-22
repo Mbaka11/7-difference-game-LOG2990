@@ -1,0 +1,89 @@
+<div *ngIf="!isEmpty; else emptyHistory">
+    <div class="card-container">
+        <div class="card-row">
+            <mat-card *ngFor="let card of cards | slice: startIndex:startIndex + pageSize / 2; index as i" class="card">
+                <mat-card-header class="title-area">
+                    <mat-card-title class="gameName">{{ card.gameName }}</mat-card-title>
+                    <mat-card-title class="gameDifficulty" [ngStyle]="{ color: getColor(card.gameDifficulty) }">{{
+                        card.gameDifficulty
+                    }}</mat-card-title>
+                </mat-card-header>
+                <section class="img-container flex-column">
+                    <img src="data:image/bmp;base64,{{ imageURLs[cards.indexOf(card)] }}" class="game-img" />
+                </section>
+                <section class="scores-area">
+                    <div class="scores-container">
+                        <app-top-podium [gameId]="card.gameId"></app-top-podium>
+                    </div>
+                    <!-- TODO: disable button when no podium -->
+                    <button
+                        *ngIf="disableButton2"
+                        matTooltip="Réinitialiser le podium de {{ card.gameName }}"
+                        (click)="deletePodium(card.gameId)"
+                        mat-button
+                        class="delete-podium-button"
+                    >
+                        <mat-icon>emoji_events</mat-icon>
+                    </button>
+                </section>
+                <mat-card-actions class="buttons-container flex-row">
+                    <button (click)="useLeftButton(card, buttonName1)" mat-button>{{ buttonName1 }}</button>
+                    <button [hidden]="disableButton2" [disabled]="disableButton2" (click)="useLeftButton(card, getButtonName2(card))" mat-button>
+                        {{ getButtonName2(card) }}
+                    </button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+
+        <div class="card-row">
+            <mat-card *ngFor="let card of cards | slice: startIndex + pageSize / 2:startIndex + pageSize; index as i" class="card">
+                <mat-card-header class="title-area">
+                    <mat-card-title class="gameName">{{ card.gameName }}</mat-card-title>
+                    <mat-card-title class="gameDifficulty" [ngStyle]="{ color: getColor(card.gameDifficulty) }">{{
+                        card.gameDifficulty
+                    }}</mat-card-title>
+                </mat-card-header>
+
+                <section class="img-container flex-column">
+                    <img src="data:image/bmp;base64,{{ imageURLs[cards.indexOf(card)] }}" class="game-img" />
+                </section>
+
+                <section class="scores-area">
+                    <div class="scores-container">
+                        <!-- TODO: verify podium works -->
+                        <app-top-podium [gameId]="card.gameId"></app-top-podium>
+                    </div>
+                    <!-- TODO: disable button when no podium -->
+                    <button
+                        *ngIf="disableButton2"
+                        matTooltip="Réinitialiser le podium de {{ card.gameName }}"
+                        (click)="deletePodium(card.gameId)"
+                        mat-button
+                        class="delete-podium-button"
+                    >
+                        <mat-icon>emoji_events</mat-icon>
+                    </button>
+                </section>
+                <mat-card-actions class="buttons-container flex-row">
+                    <button (click)="useLeftButton(card, buttonName1)" mat-button>{{ buttonName1 }}</button>
+                    <button [hidden]="disableButton2" [disabled]="disableButton2" (click)="useLeftButton(card, getButtonName2(card))" mat-button>
+                        {{ getButtonName2(card) }}
+                    </button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </div>
+
+    <mat-paginator [length]="cards.length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEventVariable = $event">
+    </mat-paginator>
+</div>
+
+<ng-template #emptyHistory>
+    <div class="spinner">
+        <div class="loader l1"></div>
+        <div class="loader l2"></div>
+    </div>
+    <div class="empty-game-text">
+        Aucun jeu n'a été créé. Veuillez en créer un dans la page de <a routerLink="/creation">creation</a> pour pouvoir y jouer.
+    </div>
+</ng-template>

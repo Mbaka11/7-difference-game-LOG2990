@@ -1,0 +1,198 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+#grid-container {
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    display: grid;
+    grid-template-areas:
+        'header header header'
+        'images images images'
+        'chat chat btn-surrender';
+    grid-template-rows: minmax(0, 1fr) minmax(0, 2.53fr) minmax(0, 0.5fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    padding: 10px;
+}
+
+#images-container img {
+    border: solid 1px black;
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+}
+
+#grid-container * {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+#header {
+    grid-area: header;
+    display: grid;
+    grid-template-areas: 'info playerInfo hints';
+    grid-template-rows: minmax(0, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border: solid 4px var(--primary-color-blue);
+    border-radius: 10px;
+}
+
+#player-info {
+    grid-area: playerInfo;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    flex-direction: column;
+}
+
+.player-info-font {
+    font-size: 20px;
+    color: black;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px #222222;
+}
+
+app-information-card {
+    grid-area: info;
+    height: 100%;
+    background-color: var(--primary-color-blue);
+    border-radius: 0px 0px 300px 0px;
+}
+
+app-hints-display {
+    grid-area: hints;
+    border-radius: 300px 0px 0px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    flex-direction: column;
+    background-color: var(--primary-color-blue);
+}
+
+#stats-container {
+    grid-area: stats;
+}
+
+#images-container {
+    grid-area: images;
+    margin-top: -80px;
+}
+
+img {
+    width: 640px;
+    height: 480px;
+}
+
+#chat-container {
+    margin-top: -150px;
+    margin-bottom: -900px;
+    grid-area: chat;
+}
+
+#btn-surrender-container {
+    margin-top: -100px;
+    grid-area: btn-surrender;
+    display: flex;
+    justify-content: center;
+}
+.btn-wrapper {
+    flex: 1;
+}
+
+#btn-surrender {
+    background-color: #aa0f26;
+    color: rgb(255, 255, 255);
+    height: 3em;
+    width: 10em;
+    margin: auto;
+    display: block;
+    transition: all 0.3s ease;
+    border-radius: 15px;
+}
+
+#btn-surrender::after {
+    background-color: #d2122e;
+}
+
+#btn-surrender:hover {
+    background-color: rgb(255, 0, 0);
+    color: rgb(255, 255, 255);
+    height: 3.2em;
+    width: 10.2em;
+}
+
+#grid-container {
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+#cheatOnButton {
+    background-color: green;
+    color: rgb(255, 255, 255);
+    height: 3em;
+    width: 10em;
+    margin: auto;
+    display: block;
+    transition: all 0.3s ease;
+    border-radius: 15px;
+}
+
+#cheatOnButton::after {
+    background-color: green;
+}
+
+#cheatOnButton:hover {
+    background-color: green;
+    color: rgb(255, 255, 255);
+    height: 3.2em;
+    width: 10.2em;
+}
+
+*:focus {
+    outline: none;
+}
+
+.play-area {
+    border: dashed black 2px;
+}
+
+#replay-buttons-container[hidden] {
+    display: none !important;
+}
+
+#replay-buttons-container {
+    margin-left: -100px;
+    margin-right: -100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+#playback-speed-container {
+    margin: 10px;
+}
+
+#replay-buttons-buttons-container button {
+    margin: 10px;
+}
+
+#playback-speeds-label {
+    margin-bottom: 3px;
+}
+
+.mat-radio-button {
+    margin-right: 20px;
+    font-size: 18px;
+    color: #333;
+}

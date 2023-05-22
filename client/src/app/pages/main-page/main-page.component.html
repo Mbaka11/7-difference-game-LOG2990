@@ -1,0 +1,22 @@
+<body>
+    <div class="container justified">
+        <audio src="./assets/sounds/theme.mp3" style="display: none" loop autoplay [volume]="0.03"></audio>
+        <h1 class="header-item"><img class="image-titre" src="./assets/images/title-eagle.png" alt="Titre Projet" /></h1>
+        <img src="./assets/images/logoeagle.png" alt="Logo Projet" class="image-logo" />
+        <section id="server-message" class="justified">
+            <div class="justified">
+                <button mat-raised-button class="button" routerLink="/selectgame">CLASSIQUE</button>
+                <button mat-raised-button class="button" (click)="openDialog()">TEMPS LIMITÉ</button>
+                <button mat-raised-button class="button" routerLink="/configuration">CONFIGURATION</button>
+            </div>
+        </section>
+        <footer class="footer-item">
+            <h4 class="team-name">Équipe 311</h4>
+            <p>
+                <span>Olivier Falardeau</span>, <span>Jérôme Chabot</span>, <span>Wassim Hamadache</span>, <span>Marsel Bakashov</span>,
+                <span>Omar Bamrim</span>,
+                <span>Simon-Alexandre Bastin</span>
+            </p>
+        </footer>
+    </div>
+</body>

@@ -1,0 +1,45 @@
+h2 {
+    text-align: center;
+}
+table {
+    table-layout: auto;
+    height: 100%;
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0 15px;
+}
+
+.firstPlace {
+    border-style: solid;
+    border-color: gold;
+    border-radius: 25% 10%;
+}
+.secondPlace {
+    border-style: solid;
+    border-color: silver;
+    border-radius: 25% 10%;
+}
+.thirdPlace {
+    border-style: solid;
+    border-color: #cd7f32;
+    border-radius: 25% 10%;
+}
+
+td {
+    padding: 5px;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.topName {
+    color: var(--primary-color-blue);
+    text-align: center;
+}

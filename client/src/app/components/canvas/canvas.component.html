@@ -1,0 +1,16 @@
+<div class="canvas-container">
+    <canvas id="modifications" class="canvas" #modifications width="640" height="480"></canvas>
+    <canvas
+        id="currentModification"
+        (mousedown)="mouseDown($event)"
+        (mousemove)="mouseMove($event)"
+        (mouseup)="mouseUp($event)"
+        (mouseout)="mouseOut($event)"
+        (mouseenter)="mouseEnter($event)"
+        class="canvas"
+        #currentModification
+        width="640"
+        height="480"
+    ></canvas>
+</div>
+

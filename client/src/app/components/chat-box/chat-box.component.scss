@@ -1,0 +1,53 @@
+.chatbox-container {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    height: 150px;
+    margin-bottom: 100px;
+    padding: 10px;
+    border: 1px solid black;
+    justify-content: space-between;
+}
+
+.messages {
+    overflow-y: scroll;
+}
+
+.message {
+    margin-bottom: -5px;
+    font-size: 10px;
+}
+
+.input-container {
+    display: flex;
+    align-items: center;
+    height: 10%;
+}
+
+input[type='text'] {
+    flex: 1;
+    height: 70%;
+    padding: 5px;
+    font-size: 10px;
+    opacity: 0.6;
+}
+
+input[type='text']:focus {
+    opacity: 0.8;
+}
+
+button {
+    background-color: green;
+    color: white;
+    height: 100%;
+    padding: 12px;
+    font-size: 10px;
+    cursor: pointer;
+    border: none;
+    display: flex;
+    align-items: center;
+}
+
+.system-message {
+    font-weight: bold;
+}

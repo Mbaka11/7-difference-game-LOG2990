@@ -1,0 +1,13 @@
+<h2 mat-dialog-title>Historique des parties</h2>
+<mat-dialog-content class="mat-typography">
+    <app-history-input></app-history-input>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close matTooltip="Quitter">
+        <mat-icon>clear</mat-icon>
+    </button>
+    <button mat-button matTooltip="Réintialiser l'historique" (click)="clearHistory()" [disabled]="isEmpty">
+        <mat-icon>restore</mat-icon>
+    </button>
+</mat-dialog-actions>

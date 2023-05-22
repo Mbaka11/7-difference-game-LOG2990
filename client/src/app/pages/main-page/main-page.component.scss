@@ -1,0 +1,107 @@
+:root {
+    --background-color: #ffffff;
+    --button-color: #41547d;
+    --highlight-color: #fc480a;
+    --black-rich: #101215;
+}
+
+.container {
+    min-height: 100vh;
+    height: auto;
+    display: grid
+}
+
+.main-container {
+    display: flex 
+}
+
+.justified {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.button {
+    margin-top: 10px;
+    text-align: center;
+    width: 25em;
+    height: 5em;
+    color: white;
+    background-color: #41547d;
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.button:hover {
+    background-color: #6683c3;
+    border: black 2px;
+    width: 25.5em;
+    height: 5.5em;
+}
+
+.button:after {
+    content: '';
+    position: absolute;
+    width: 50%;
+    height: 2px;
+    bottom: 25px;
+    left: 90px;
+    transform: scaleX(0);
+    box-shadow: 0 5px 0 #ffffff;
+    transform-origin: bottom right;
+    transition: transform 0.5s ease-out;
+}
+
+.button:hover:after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+.team-name {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    color: #101215;
+}
+
+.header-item {
+    justify-content: center;
+    text-align: center;
+}
+
+.image-titre {
+    width: 50%;
+    height: auto;
+}
+
+.image-logo {
+    height: 17em;
+    width: auto;
+}
+
+img .image-logo {
+    height: 100%;
+    width: auto;
+}
+
+.footer-item {
+    text-align: center;
+}
+
+.footer-item p :nth-child(even) {
+    color: #41547d;
+}
+.footer-item p :nth-child(odd) {
+    color: #fc480a;
+}
+
+.server-message {
+    justify-content: center;
+    width: 20%;
+    min-width: min-content;
+}
+
+body {
+    background-color: #ffffff;
+}

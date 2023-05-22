@@ -1,0 +1,83 @@
+<link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet" type="text/css" />
+
+<div id="grid-container">
+    <div id="information-card"></div>
+    <div id="header" class="flex flex-column flex-align-axis">
+        <app-information-card
+            *ngIf="gameCardLoaded"
+            [title]="gameInProgress.gameCard.gameName"
+            [mode]="'Classique'"
+            [difficulty]="gameInProgress.gameCard.gameDifficulty"
+            [nbrDifferences]="gameInProgress.gameCard.numberOfDiff"
+        ></app-information-card>
+        <div id="player-info">
+            <p class="player-info-font">Nom de joueur : {{ gameInProgress.username }}</p>
+            <p #usernameParagraph class="player-info-font">Nom de l'adversaire : {{ gameInProgress.opponentUsername }}</p>
+            <app-timer id="app-timmer"></app-timer>
+            <p class="player-info-font">Différences trouvées : {{ points.numberOfDifferences }}</p>
+            <p #pointsParagraph class="player-info-font">Différences trouvées par l'adversaire: {{ points.numberOfDifferencesAdversary }}</p>
+            <p class="player-info-font">Mode Triche : {{ gameService.cheatStatusString }}</p>
+        </div>
+        <app-hints-display
+            (callParentMethodEvent)="hintManagement(this.generalGameService.differenceRandomizer(this.gameInProgress))"
+        ></app-hints-display>
+    </div>
+    <div id="images-container" class="flex flex-align-axis">
+        <canvas #canvas1 width="640" height="480" class="play-area"></canvas>
+        <div *ngIf="showReplayButtons" id="replay-buttons-container" #replayContainer>
+            <label id="playback-speeds-label">Vitesse de reprise</label>
+            <div id="playback-speed-container">
+                <mat-radio-group aria-labelledby="radio-group-label" [(ngModel)]="playBack.playbackSpeed">
+                    <mat-radio-button class="radius-button" [value]="1" (click)="gameService.emitCorrectSpeed(1, this.gameInProgress.roomName)"
+                        >X 1</mat-radio-button
+                    >
+                    <mat-radio-button class="radius-button" [value]="2" (click)="gameService.emitCorrectSpeed(2, this.gameInProgress.roomName)"
+                        >X 2</mat-radio-button
+                    >
+                    <mat-radio-button class="radius-button" [value]="4" (click)="gameService.emitCorrectSpeed(4, this.gameInProgress.roomName)"
+                        >X 4</mat-radio-button
+                    >
+                </mat-radio-group>
+            </div>
+            <div id="replay-buttons-buttons-container">
+                <button
+                    type="button"
+                    mat-fab
+                    color="primary"
+                    matTooltip="{{ playBack.playPauseToolTip }}"
+                    matTooltipPosition="after"
+                    (click)="this.togglePlayPause()"
+                >
+                    <mat-icon>{{ playBack.playPauseIcon }}</mat-icon>
+                </button>
+                <button
+                    type="button"
+                    mat-fab
+                    color="primary"
+                    matTooltip="Recommencer"
+                    matTooltipPosition="after"
+                    (click)="this.videoReplayService.restart(this.gameInProgress.roomName)"
+                >
+                    <mat-icon>restart_alt</mat-icon>
+                </button>
+            </div>
+        </div>
+        <canvas #canvas2 width="640" height="480" class="play-area"></canvas>
+    </div>
+    <div #chatBoxContainer id="chat-container" class="cheat">
+        <app-chat-box></app-chat-box>
+    </div>
+    <div id="btn-surrender-container" class="flex-row">
+        <div class="btn-wrapper">
+            <button mat-raised-button id="btn-surrender" (click)="this.endgameService.onAbandon(gameType, gameInProgress)">Abandonner</button>
+        </div>
+        <div class="btn-wrapper" #cheatButtonContainer>
+            <div *ngIf="gameService.cheatStatus; else cheatOffButton">
+                <button mat-raised-button id="cheatOnButton">Mode Triche</button>
+            </div>
+            <ng-template #cheatOffButton>
+                <button mat-raised-button id="btn-surrender" class="cheatOffButton">Mode Triche</button>
+            </ng-template>
+        </div>
+    </div>
+</div>

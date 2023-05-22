@@ -1,0 +1,26 @@
+<h2 mat-dialog-title>Définir des constantes de jeux</h2>
+<mat-dialog-content class="mat-typography">
+    <h3>Temps initial du compte à rebours (s)</h3>
+    <app-stepper-constants #gameTimeStepper [(time)]="gameTimeConstants.gameTime" [step]="5" [maxValue]="300"></app-stepper-constants>
+    <h3>Temps de pénalité pour l’utilisation d’un indice (s)</h3>
+    <app-stepper-constants #penaltyTimeStepper [(time)]="gameTimeConstants.penaltyTime" [step]="1" [maxValue]="60"></app-stepper-constants>
+    <h3>Temps gagné avec la découverte d’une différence (s)</h3>
+    <app-stepper-constants #successTimeStepper [(time)]="gameTimeConstants.successTime" [step]="1" [maxValue]="60"></app-stepper-constants>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close matTooltip="Quitter">
+        <mat-icon>clear</mat-icon>
+    </button>
+    <button mat-button matTooltip="Réintialiser les constantes" (click)="onClickResetTimeConstants()" [disabled]="isDefaultTimeSettings()">
+        <mat-icon>restore</mat-icon>
+    </button>
+    <button
+        mat-button
+        cdkFocusInitial
+        matTooltip="Appliquer les changements"
+        (click)="onclickSaveTimeConstants()"
+        [disabled]="!gameTimeStepper.hasChanged && !penaltyTimeStepper.hasChanged && !successTimeStepper.hasChanged"
+    >
+        <mat-icon>save_alt</mat-icon>
+    </button>
+</mat-dialog-actions>

@@ -1,0 +1,24 @@
+<link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet" type="text/css" />
+<div id="header">
+    <p class="player-info-font">Salle d'attente</p>
+    <app-information-card
+        *ngIf="gameCardLoaded"
+        [title]="gameCard.gameName"
+        [mode]="gameMode"
+        [difficulty]="gameCard.gameDifficulty"
+        [nbrDifferences]="gameCard.numberOfDiff"
+        [hintPenalty]="'A determiner'"
+    ></app-information-card>
+    <p class="player-info-font">Nom de joueur : {{ username }}</p>
+    <p *ngIf="isRoomFull">La partie est pleine, veuillez attendre pour de la place ...</p>
+    <p *ngIf="isGameCreator && !isRoomFull && !opponentUsername">En attente d'un adversaire ...</p>
+    <p *ngIf="!isGameCreator && !isRoomFull">En attente de la reponse du createur ...</p>
+    <p *ngIf="opponentUsername">Acceptez-vous de batailler, tabasser, même j'dirais violemment frapper votre adversaire : {{ opponentUsername }} ?</p>
+    <div *ngIf="opponentUsername">
+        <button (click)="acceptOpponent()">Accepter</button>
+        <button (click)="refuseOpponent()">Refuser</button>
+    </div>
+    <div>
+        <button routerLink="/home" (click)="leaveGame()">Annuler</button>
+    </div>
+</div>

@@ -1,0 +1,14 @@
+#info-label {
+    background-color: var(--primary-color-blue);
+    border-radius: 0px 0px 300px 0px;
+    box-shadow: none;
+}
+
+#info-label mat-card-title,
+mat-card-content {
+    color: rgb(255, 255, 255);
+}
+
+#info-label mat-card-title {
+    border-bottom: solid 1px rgb(255, 255, 255);
+}

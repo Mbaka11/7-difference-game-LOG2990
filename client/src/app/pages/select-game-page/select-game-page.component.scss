@@ -1,0 +1,90 @@
+
+
+:host { --orange : #8D2401;
+    --black: #101215;
+    --grey: #e7dfd3;
+    --blue: #3f51b5;
+    --yellow: #c6b473;
+    --lightBlue: #eaecf4;
+    --gold: #f4e8a5;
+    --altBlue:#98a2d9;
+   
+}
+.flex-column{
+    display:flex;
+    flex-direction: column
+}
+
+.flex-row{
+    display:flex;
+    flex-direction: row
+}
+
+
+
+
+.main-area{
+    display: grid;
+   
+    background-color: #eaecf4;
+    grid-template-areas: 
+    "title title title title title"
+    ". . . . ."
+    ". area_1 . area_2 ."
+    ". . . . ."
+    ". area_3 . area_4 ."
+    ". . . . ."
+    "footer footer footer footer footer";
+   
+    grid-template-columns  : 3% 45% auto 45% 1%;
+    grid-template-rows : 6% 3% 37% 5% 37% 5% auto;
+    
+    
+    height:100vh; 
+    position: relative;
+    margin: 0 0 0 0;
+    }
+
+
+ .area_1{ grid-area: area_1;}
+ .area_2{ grid-area: area_2;}
+ .area_3{ grid-area: area_3;}
+ .area_4{ grid-area: area_4;}
+ .footer{grid-area: footer;}
+ 
+
+ .title-area{
+    grid-area : title;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+
+#title {
+   align-items: center;
+}
+
+.headbar{
+    background: #3f51b5;
+    color:whitesmoke;
+    
+}
+
+.footbar{
+    background: var(--altBlue);
+    color: white;
+    justify-content: center;
+    
+}
+
+.arrow-parent{
+   padding-bottom: 15px;
+
+}
+
+.arrow:hover{
+    color: var(--blue)
+
+}

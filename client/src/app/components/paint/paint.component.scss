@@ -1,0 +1,108 @@
+@mixin step1($width, $color) {
+    box-shadow: $width 0 $color, -$width 0 $color, 0 (-$width) $color, 0 $width $color;
+    margin: $width auto;
+}
+@mixin step2v2($width, $color, $bgcolor) {
+    box-shadow: $width 0 $bgcolor, -$width 0 $bgcolor, 0 (-$width) $bgcolor, 0 $width $bgcolor, 2 * $width 0 $color, -2 * $width 0 $color,
+        0 (-2 * $width) $color, 0 2 * $width $color, 0 0 0 $width $color;
+    margin: 2 * $width auto;
+}
+@mixin step3v2($width, $color, $bgcolor) {
+    box-shadow: $width 0 $bgcolor, -$width 0 $bgcolor, 0 (-$width) $bgcolor, 0 $width $bgcolor, 2 * $width 0 $bgcolor, -2 * $width 0 $bgcolor,
+        0 (-2 * $width) $bgcolor, 0 2 * $width $bgcolor, 0 0 0 $width $bgcolor, 3 * $width 0 $color, -3 * $width 0 $color, 0 3 * $width $color,
+        0 (-3 * $width) $color, 0 (-$width) 0 $width $color, 0 $width 0 $width $color, $width 0 0 $width $color, -$width 0 0 $width $color;
+    margin: 3 * $width auto;
+}
+@mixin step4($width, $color, $bgcolor) {
+    box-shadow: $width 0 $bgcolor, -$width 0 $bgcolor, 0 (-$width) $bgcolor, 0 $width $bgcolor, 2 * $width 0 $bgcolor, -2 * $width 0 $bgcolor,
+        0 (-2 * $width) $bgcolor, 0 2 * $width $bgcolor, 0 0 0 $width $bgcolor, 3 * $width 0 $bgcolor, -3 * $width 0 $bgcolor, 0 3 * $width $bgcolor,
+        0 (-3 * $width) $bgcolor, 0 (-$width) 0 $width $bgcolor, 0 $width 0 $width $bgcolor, $width 0 0 $width $bgcolor, -$width 0 0 $width $bgcolor,
+        4 * $width 0 $color, -4 * $width 0 $color, 0 (-4 * $width) $color, 0 4 * $width $color, 2 * $width 0 0 $width $color,
+        -2 * $width 0 0 $width $color, 0 2 * $width 0 $width $color, 0 (-2 * $width) 0 $width $color, 0 0 0 2 * $width $color;
+    margin: 4 * $width auto;
+}
+@mixin other($width, $color, $bgcolor) {
+    box-shadow: 4 * $width 0 $bgcolor, -4 * $width 0 $bgcolor, 0 (-4 * $width) $bgcolor, 0 4 * $width $bgcolor, $width 0 0 2 * $width $bgcolor,
+        -$width 0 0 2 * $width $bgcolor, 0 (-$width) 0 2 * $width $bgcolor, 0 $width 0 2 * $width $bgcolor, 5 * $width 0 $color, -5 * $width 0 $color,
+        0 (-5 * $width) $color, 0 5 * $width $color, 0 0 0 3 * $width $color, 0 2 * $width 0 2 * $width $color, 0 (-2 * $width) 0 2 * $width $color,
+        2 * $width 0 0 2 * $width $color, (-2 * $width) 0 0 2 * $width $color;
+    margin: 5 * $width auto;
+}
+
+.container {
+    width: 95%;
+    display: grid;
+    grid-template-columns: 1fr 0.25fr 1fr;
+
+    @include other(4px, var(--primary-color-blue), white);
+}
+
+.container button {
+    color: var(--primary-color-blue);
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.container mat-icon {
+    margin: 10px;
+}
+
+.image-button {
+    grid-column: 1;
+}
+
+button:hover span {
+    text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+    background: #f29b18;
+    color: #ffffff;
+}
+
+#palette {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    border: 1px solid black;
+    grid-column: 3;
+    grid-row: 1/4;
+}
+
+.color-option {
+    cursor: pointer;
+    border: 1px solid black;
+}
+
+.tool-select-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-bottom: 15px;
+}
+
+.stroke-width-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.stroke-button {
+    margin-left: 30px;
+}
+
+#selected-color {
+    grid-row: 1/3;
+    grid-column: 2;
+    margin-left: 10px;
+    margin-right: 10px;
+    border: 2px solid black;
+}
+
+@media only screen and (max-width: 600px) {
+    .element {
+        width: 100%;
+    }
+}

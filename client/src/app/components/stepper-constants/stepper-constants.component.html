@@ -1,0 +1,9 @@
+<div class="stepper-constants">
+    <button mat-mini-fab color="primary" (click)="removeTime()" [disabled]="isMin()">
+        <mat-icon class="button-icon">remove</mat-icon>
+    </button>
+    <span class="timer-value">{{ time }}</span>
+    <button mat-mini-fab color="primary" (click)="addTime()" [disabled]="isMax()">
+        <mat-icon class="button-icon">add</mat-icon>
+    </button>
+</div>

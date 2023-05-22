@@ -1,0 +1,8 @@
+<div class="frame">
+    <app-form [form]="form" (username)="onUsernameChange($event)"></app-form>
+    <p class="title">Quel mode de jeux?</p>
+    <button mat-raised-button mat-dialog-close class="button" (click)="changePage()" [disabled]="form.invalid || !form.value.username">SOLO</button>
+    <button mat-raised-button mat-dialog-close class="button" (click)="changePageMultiplayer()" [disabled]="form.invalid || !form.value.username">
+        CO-OP
+    </button>
+</div>

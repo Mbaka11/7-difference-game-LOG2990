@@ -1,0 +1,27 @@
+<section class="flex-column">
+    <th class="topName">TOP 3</th>
+    <div class="flex-row">
+        <table>
+            <tr>
+                <th></th>
+                <th>SOLO</th>
+                <th>MULTIJOUEUR</th>
+            </tr>
+            <tr class="firstPlace">
+                <th>🥇</th>
+                <td>{{ podium?.solo?.first?.name }} : {{ podium?.solo?.first?.time }}</td>
+                <td>{{ podium?.multiplayer?.first?.name }} : {{ podium?.multiplayer?.first?.time }}</td>
+            </tr>
+            <tr class="secondPlace">
+                <th>🥈</th>
+                <td>{{ podium?.solo?.second?.name }} : {{ podium?.solo?.second?.time }}</td>
+                <td>{{ podium?.multiplayer?.second?.name }} : {{ podium?.multiplayer?.second?.time }}</td>
+            </tr>
+            <tr class="thirdPlace">
+                <th>🥉</th>
+                <td>{{ podium?.solo?.third?.name }} : {{ podium?.solo?.third?.time }}</td>
+                <td>{{ podium?.multiplayer?.third?.name }} : {{ podium?.multiplayer?.third?.time }}</td>
+            </tr>
+        </table>
+    </div>
+</section>

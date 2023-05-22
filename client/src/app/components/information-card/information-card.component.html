@@ -1,0 +1,12 @@
+<mat-card id="info-label">
+    <mat-card-title>Nom : {{ title }}</mat-card-title>
+    <mat-card-content>Mode : {{ mode }}</mat-card-content>
+    <mat-card-content>Difficulté : {{ difficulty }}</mat-card-content>
+    <mat-card-content>Nombre de différences : {{ nbrDifferences }}</mat-card-content>
+    <div #timeVariablesHint class="time-variables-hint">
+        <mat-card-content>Pénalité de temps pour indice : {{ timePenalty }}</mat-card-content>
+    </div>
+    <div #timeVariables class="time-variables">
+        <mat-card-content>Gain de temps pour réussite : {{ timeGain }}</mat-card-content>
+    </div>
+</mat-card>

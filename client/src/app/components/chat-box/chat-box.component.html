@@ -1,0 +1,11 @@
+<div class="chatbox-container">
+    <div #scrollMe class="messages">
+        <div class="message" *ngFor="let message of messages">
+            <p [style.color]="message.color" [ngClass]="{ 'system-message': message.isSystem }">{{ message.message }}</p>
+        </div>
+    </div>
+    <div #inputContainer class="input-container">
+        <input type="text" [(ngModel)]="newMessage" (keyup.enter)="sendMessage()" maxlength="200" placeholder="Entrez un message..." />
+        <button (click)="sendMessage()">Envoyer</button>
+    </div>
+</div>

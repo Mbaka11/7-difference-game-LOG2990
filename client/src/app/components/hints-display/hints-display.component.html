@@ -1,0 +1,9 @@
+<div class="hint-container">
+    <div class="hints">
+        <mat-icon *ngFor="let hint of hints" [ngClass]="{ 'hint-pale': !hint.active }" class="hint">lightbulb </mat-icon>
+    </div>
+
+    <button mat-raised-button (click)="callParentMethod()" >Avoir un indice</button>
+
+    <div id="noMoreHintsMessage" *ngIf="hintNumber === 0">Vous n'avez plus d'indice!</div>
+</div>

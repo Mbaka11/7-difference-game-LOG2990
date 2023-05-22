@@ -1,0 +1,6 @@
+<form class="username-form" [formGroup]="form" (ngSubmit)="username.emit(form.get('username')?.value)">
+    <mat-form-field class="example-full-width">
+        <mat-label>Nom d'utilisateur</mat-label>
+        <input type="username" matInput placeholder="Ex. TheLegend27" formControlName="username" />
+    </mat-form-field>
+</form>
